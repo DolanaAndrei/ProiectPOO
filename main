@@ -1,0 +1,219 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+using namespace std;
+
+//char[10]
+//char* = "aaaaaaaaaa"
+//char** = "Aaaaaaaaaa"	
+//			"bbbbbbbbb" 
+
+
+
+/*
+ nume_coloana_1, tip, dimensiune, valoare_implicita
+*/
+
+//CREATE_TABLE((nume_coloana_1, tip, dimensiune, valoare_implicita), (nume_coloana_2, tip, dimensiune, valoare_implicita))
+
+/*
+
+//index
+
+nume_coloana_1  tip1  dimensiune1  vi1
+nume_coloana_2  tip2  dimensiune2  vi2
+...
+
+*/
+
+//CREATE TABLE, DROP TABLE, DISPLAY TABLE
+
+string identifica_tip_comanda()
+{
+	cout << "Introduceti comanda: " << endl;
+	string s;
+	getline(cin, s);
+	
+	if (s == "")
+	{
+	
+	}
+
+	return "Comanda a fost introdusa gresit";
+}
+
+
+class TABLE
+{
+public:
+
+	char* nume_tabela;
+
+	int* nr_coloane;
+
+	char** nume_coloane;
+	char** tipuri;
+	int* dimensiuni;
+	char** valori_implicite;
+
+	TABLE()
+	{
+		nume_tabela = nullptr;
+
+		nr_coloane = nullptr;
+		
+		nume_coloane = nullptr;
+		tipuri = nullptr;
+		dimensiuni = nullptr;
+		valori_implicite = nullptr;
+	}
+
+	TABLE(char* nume_tabela, int* nr_coloane)
+	{
+		this->nr_coloane = nr_coloane;
+
+		if (nume_tabela != nullptr)
+		{
+			this->nume_tabela = new char[strlen(nume_tabela) + 1];
+			strcpy_s(this->nume_tabela, strlen(nume_tabela) + 1, nume_tabela);
+		}
+		else
+		{
+			this->nume_tabela = nullptr;
+		}
+
+		nume_coloane = nullptr;
+		tipuri = nullptr;
+		dimensiuni = nullptr;
+		valori_implicite = nullptr;
+	}
+
+	TABLE(char* nume_tabela, int* nr_coloane, char** nume_coloane, char** tipuri, int* dimensiuni, char** valori_implicite)
+	{
+		this->nr_coloane = nr_coloane;
+
+		if (nume_tabela != nullptr)
+		{
+			this->nume_tabela = new char[strlen(nume_tabela) + 1];
+			strcpy_s(this->nume_tabela, strlen(nume_tabela) + 1, nume_tabela);
+		}
+		else
+		{
+			this->nume_tabela = nullptr;
+		}
+
+		if (nume_coloane != nullptr)
+		{
+			for (int i = 0; i < *nr_coloane; i++)
+			{
+				this->nume_coloane[i] = new char[strlen(nume_coloane[i]) + 1];
+				strcpy_s(this->nume_coloane[i], strlen(nume_coloane[i]) + 1, nume_coloane[i]);
+			}
+		}
+		else
+		{
+			this->nume_coloane = nullptr;
+		}
+
+		if (tipuri != nullptr)
+		{
+			for (int i = 0; i < *nr_coloane; i++)
+			{
+				this->tipuri[i] = new char[strlen(tipuri[i]) + 1];
+				strcpy_s(this->tipuri[i], strlen(tipuri[i]) + 1, tipuri[i]);
+			}
+		}
+		else
+		{
+			this->tipuri = nullptr;
+		}
+
+		if (dimensiuni != nullptr)
+		{
+			for (int i = 0; i < *nr_coloane; i++)
+			{
+				this->dimensiuni[i] = dimensiuni[i];
+			}
+		}
+		else
+		{
+			this->dimensiuni = nullptr;
+		}
+
+		if (valori_implicite != nullptr)
+		{
+			for (int i = 0; i < *nr_coloane; i++)
+			{
+				this->valori_implicite[i] = new char[strlen(valori_implicite[i]) + 1];
+				strcpy_s(this->valori_implicite[i], strlen(valori_implicite[i]) + 1, valori_implicite[i]);
+			}
+		}
+		else
+		{
+			this->valori_implicite = nullptr;
+		}
+	}
+
+	~TABLE()
+	{
+		if (nume_tabela != nullptr)
+		{
+			delete[] nume_tabela;
+		}
+
+		if (nr_coloane != nullptr)
+		{
+			delete[] nr_coloane;
+		}
+
+		if (nume_coloane != nullptr)
+		{
+			delete[] nume_coloane;
+		}
+
+		if (tipuri != nullptr)
+		{
+			delete[] tipuri;
+		}
+
+		if (dimensiuni != nullptr)
+		{
+			delete[] dimensiuni;
+		}
+
+		if (valori_implicite != nullptr)
+		{
+			delete[] valori_implicite;
+		}
+	}
+
+
+
+	/*void CREATE_TABLE(int* nr_coloane, char* nume_tabela, char** nume_coloane, char** tipuri, int* dimensiuni, char** valori_implicite)
+	{
+		constructor
+	}*/
+
+	/*void DROP_TABLE(TABLE* nume)
+	{
+		destructor
+		delete nume;
+	}*/
+};
+
+int main()
+{
+	//char* int*
+
+	char c[10] = "tabela_1";
+
+	int x = 3;
+	int* xp = &x;
+
+	TABLE* t = new TABLE(c, xp);
+
+	//t.DROP_TABLE(t);
+
+	identifica_tip_comanda();
+}
